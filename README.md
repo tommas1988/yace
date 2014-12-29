@@ -45,7 +45,7 @@ purpose as `Yaf_View_Interface::setScriptPath`
 Script or layout path is a absolute base path that view scripts live
 in. And view or layout name follows by the view script extension could
 locate a view script under the script path. A view name index/index and
-phtml extension would point to index/index.phtml under script path.
+phtml extension, for example, would point to index/index.phtml under script path.
 
 ###Yace\Exceptions
 All exceptions that Yace might throw are implements
