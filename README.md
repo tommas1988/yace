@@ -3,7 +3,7 @@
 
 ##About Yace
 
-Yace stands for _Y_af l_a_yout _c_apable vi_e_w, is a layout capable
+Yace stands for **Y**af l**a**yout **c**apable vi**e**w, is a layout capable
 view engine that run on Yaf.
 
 
