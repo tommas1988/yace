@@ -70,18 +70,6 @@ class LayoutCapableView implements \Yaf_View_Interface
     }
 
     /**
-     * Set relative layout path
-     *
-     * @param  string $layout Relative layout path
-     * @return self
-     */
-    public function setLayout($layout)
-    {
-        $this->getLayout()->setViewName($layout);
-        return $this;
-    }
-
-    /**
      * Get Layout view entity
      *
      * @return ViewEntity
@@ -116,28 +104,6 @@ class LayoutCapableView implements \Yaf_View_Interface
                        ->setScriptPath($layoutPath);
 
         return $this->__layout;
-    }
-
-    /**
-     * Set layout base path
-     *
-     * @param  string $layoutPath Layout base path
-     * @return self
-     */
-    public function setLayoutPath($layoutPath)
-    {
-        $this->getLayout()->setScriptPath($layoutPath);
-        return $this;
-    }
-
-    /**
-     * Get layout base path
-     *
-     * @return string
-     */
-    public function getLayoutPath()
-    {
-        return $this->getLayout()->getScriptPath();
     }
 
     /**
