@@ -24,9 +24,12 @@ other functions.
 Some important ones are:
 * `Yace\LayoutCapableView::getLayout` returns Layout view object
 * `Yace\LayoutCapableView::disableLayout` disable layout view
-* `Yace\LayoutCapableView::getViewEntity` returns current request view object
+* `Yace\LayoutCapableView::getViewEntity` returns current request view
+object
+* `Yace\LayoutCapableView::registerViewHelper` registers view helper
 * `Yace\LayoutCapableView::__set` sets global view variable
 * `Yace\LayoutCapableView::__get` gets global view variable
+* `Yace\LayoutCapableView::__call` invoke view helper
 
 >Global view variables are variables that can access in the form of
 >`$this->var-name` in all views of a structured view

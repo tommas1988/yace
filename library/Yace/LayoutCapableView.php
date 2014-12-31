@@ -2,6 +2,7 @@
 namespace Yace;
 
 use Yace\Exception\DomainException;
+use Yace\Exception\InvalidCallbackException;
 use Yace\Exception\InvalidViewScriptException;
 use Yace\Exception\RuntimeException;
 
@@ -51,6 +52,12 @@ class LayoutCapableView implements \Yaf_View_Interface
      * @var array
      */
     protected $__variables = array();
+
+    /**
+     * View helpers
+     * @var array
+     */
+    protected $__viewHelpers = array();
 
     /**
      * Construtor
@@ -118,6 +125,31 @@ class LayoutCapableView implements \Yaf_View_Interface
     }
 
     /**
+     * Register view helper
+     *
+     * @param  string $name Helper name
+     * @param  callback $callback
+     * @param  bool $override Whether override existance callback
+     * @return self
+     * @throws DomainException If try to override existance helper while the override flag is false
+     * @throws InvalidCallbackException If callback is not callable
+     */
+    public function registerViewHelper($name, $callback, $override = false)
+    {
+        if (false === $override && isset($this->__viewHelpers[$name])) {
+            throw new DomainException(sprintf(
+                'View helper: %s already exists', $name));
+        }
+        if (!is_callable($callback)) {
+            throw new InvalidCallbackException(sprintf(
+                'Invalid callback: %s', var_export($callback, 1)));
+        }
+
+        $this->__viewHelpers[$name] = $callback;
+        return $this;
+    }
+
+    /**
      * Set global view variable
      *
      * @param string $name
@@ -143,6 +175,24 @@ class LayoutCapableView implements \Yaf_View_Interface
         }
 
         return $this->__variables[$name];
+    }
+
+    /**
+     * Invoke a view helper
+     *
+     * @param  string $name
+     * @param  array $arguments
+     * @return mixed
+     * @throws DomainException If request helper dose not exist
+     */
+    public function __call($name, $arguments)
+    {
+        if (!isset($this->__viewHelpers[$name])) {
+            throw new DomainException(sprint(
+                'Request helper: %s dose not exist', $name));
+        }
+
+        return call_user_func_array($this->__viewHelpers[$name], $arguments);
     }
 
     /**
